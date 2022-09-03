@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://light.png/basic_circle.png" type="Texture" id=1]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+
+[node name="Light2D" type="Light2D"]
+position = Vector2( 484, 241 )
+scale = Vector2( 2.625, 2.78125 )
+texture = ExtResource( 1 )
+texture_scale = 2.25
+energy = 0.8
+
+[node name="background light" type="CanvasModulate" parent="."]
+
+[node name="select shadow" type="LightOccluder2D" parent="."]
+position = Vector2( -154, 72 )
+occluder = SubResource( 1 )

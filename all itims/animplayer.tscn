@@ -1,0 +1,78 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://all itims/player.x3.gd" type="Script" id=1]
+[ext_resource path="res://Individual Sprites/adventurer-run2-04.png" type="Texture" id=2]
+[ext_resource path="res://Individual Sprites/adventurer-run2-03.png" type="Texture" id=3]
+[ext_resource path="res://Individual Sprites/adventurer-run2-02.png" type="Texture" id=4]
+[ext_resource path="res://Individual Sprites/adventurer-run2-05.png" type="Texture" id=5]
+[ext_resource path="res://Individual Sprites/adventurer-walk-02.png" type="Texture" id=6]
+[ext_resource path="res://Individual Sprites/adventurer-walk-05.png" type="Texture" id=7]
+[ext_resource path="res://Individual Sprites/adventurer-walk-04.png" type="Texture" id=8]
+[ext_resource path="res://Individual Sprites/adventurer-walk-00.png" type="Texture" id=9]
+[ext_resource path="res://Individual Sprites/adventurer-walk-01.png" type="Texture" id=10]
+[ext_resource path="res://Individual Sprites/adventurer-run2-01.png" type="Texture" id=11]
+[ext_resource path="res://Individual Sprites/adventurer-run2-00.png" type="Texture" id=12]
+[ext_resource path="res://Individual Sprites/adventurer-walk-03.png" type="Texture" id=13]
+[ext_resource path="res://Individual Sprites/adventurer-crouch-walk-03.png" type="Texture" id=14]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 13 ), ExtResource( 8 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "move",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "jump",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "run",
+"speed": 7.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "idel",
+"speed": 1.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 9.5, 24.5 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 14, 22.5 )
+
+[node name="animplayer" type="KinematicBody2D"]
+script = ExtResource( 1 )
+jump = -230
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 405, 175.125 )
+scale = Vector2( 1.52, 1.79054 )
+frames = SubResource( 1 )
+animation = "move"
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 410.5, 181.5 )
+shape = SubResource( 4 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 413, 183 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+smoothing_enabled = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="HDbox" type="Area2D" parent="."]
+position = Vector2( 407, 189 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HDbox"]
+position = Vector2( 6, -12 )
+shape = SubResource( 5 )
+
+[connection signal="area_entered" from="HDbox" to="." method="_on_HDbox_area_entered"]
